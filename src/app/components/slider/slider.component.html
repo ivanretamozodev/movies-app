@@ -1,33 +1,26 @@
 <div class="slider">
-    <div class="slide">
-        <div class="slide-bg">
-            <img
-                class="slide-bg-img"
-                src="https://image.tmdb.org/t/p/original/1Ds7xy7ILo8u2WWxdnkJth1jQVT.jpg"
-                alt=""
-            />
+  <ng-container *ngFor="let item of items; let i = index">
+    <div class="slide" *ngIf="i == currentSlideIndex" @slideFade>
+      <div class="slide-bg">
+        <img class="slide-bg-image" [src]="imagesSizes.large + item.backdrop_path" [alt]="item.title" />
+      </div>
+      <div class="slide-pane">
+        <h2 class="name">{{ item.title }}</h2>
+        <div class="meta">
+          <div class="info">
+            <span class="rating">
+              <span class="app-icon">star</span>
+              <span class="rating-value">{{ item.vote_average }}</span>
+              <span>/10</span>
+            </span>
+            <span>{{ item.vote_count }}</span>
+            <span>{{ item.release_date | date: 'yyyy' }}</span>
+          </div>
         </div>
-
-        <div class="slide-pane">
-            <h2 class="movie-name">los picapiedras</h2>
-            <div class="meta">
-                <div class="info">
-                    <span class="rating">
-                        <span
-                            ><span class="app-icon">star</span
-                            ><span class="rating-value">7.5</span>/10</span
-                        >
-                        <span>463 reviews</span>
-                        <span>2022</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="description mt-5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem non
-                perferendis laudantium ea quas nobis, harum tempora, animi modi accusantium deserunt
-                accusamus quia minus et commodi eligendi corrupti similique quidem?
-            </div>
+        <div class="desc mt-6">
+          {{ item.overview }}
         </div>
+      </div>
     </div>
+  </ng-container>
 </div>
