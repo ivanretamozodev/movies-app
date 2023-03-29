@@ -5,14 +5,14 @@ import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TvDto } from '../models/tv';
 import { GenresDto } from '../models/genre';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MoviesService {
-    private readonly baseUrl: string = 'https://api.themoviedb.org/3';
-    private readonly apiKey: string = '8c247ea0b4b56ed2ff7d41c9a833aa77';
-
+    private readonly baseUrl: string = environment.baseUrl;
+    private readonly apiKey: string = environment.apiKey;
     constructor(private http: HttpClient) {}
 
     getMovies(type: string = 'upcoming', count: number = 12) {
@@ -92,13 +92,5 @@ export class MoviesService {
                     return of(res.results);
                 })
             );
-    }
-
-    getTvs(type: string = 'latest', count: number = 12) {
-        return this.http.get<TvDto>(`${this.baseUrl}/tv/${type}?api_key=${this.apiKey}`).pipe(
-            switchMap((res) => {
-                return of(res.results.slice(0, count));
-            })
-        );
     }
 }

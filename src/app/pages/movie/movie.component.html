@@ -1,8 +1,15 @@
 <ng-container *ngIf="movie">
     <slider [items]="[movie]" [isBanner]="true"></slider>
     <p-tabView>
-        <app-tab-overview [movie]="movie"></app-tab-overview>
-        <app-tab-photos [movieImages]="movieImages"></app-tab-photos>
+        <p-tabPanel header="Overview">
+            <app-tab-overview [movie]="movie"></app-tab-overview>
+        </p-tabPanel>
+        <p-tabPanel header="Videos">
+            <app-tab-videos [movieVideos]="movieVideos"></app-tab-videos>
+        </p-tabPanel>
+        <p-tabPanel header="Photos">
+            <app-tab-photos [movieImages]="movieImages"></app-tab-photos>
+        </p-tabPanel>
     </p-tabView>
     <p-carousel [numVisible]="5" *ngIf="movieCredits" [value]="movieCredits.cast">
         <ng-template let-actor pTemplate="item">

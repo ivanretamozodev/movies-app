@@ -1,3 +1,4 @@
+import { TvShowService } from 'src/app/services/tv-show.service';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';

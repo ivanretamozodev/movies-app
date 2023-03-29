@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Movie, MovieCredits, MovieImages, MovieVideo } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -17,6 +18,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     movieCredits: MovieCredits | null = null;
     imagesSizes = IMAGES_SIZES;
     similarMovies: Movie[] = [];
+    subscriptions$: Subscription[] = [];
 
     constructor(private route: ActivatedRoute, private moviesService: MoviesService) {}
 
@@ -30,37 +32,45 @@ export class MovieComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-        console.log('component destroyed');
-    }
-
     getMovie(id: string) {
-        this.moviesService.getMovie(id).subscribe((movieData) => {
+        const observable$1 = this.moviesService.getMovie(id).subscribe((movieData) => {
             this.movie = movieData;
         });
+        this.subscriptions$ = [observable$1];
     }
 
     getMovieVideos(id: string) {
-        this.moviesService.getMovieVideos(id).subscribe((movieVideosData) => {
+        const observable$2 = this.moviesService.getMovieVideos(id).subscribe((movieVideosData) => {
             this.movieVideos = movieVideosData;
         });
+        this.subscriptions$.push(observable$2);
     }
 
     getMovieSimilar(id: string) {
-        this.moviesService.getMovieSimilar(id).subscribe((movieSimilarData) => {
-            this.similarMovies = movieSimilarData;
-        });
+        const observable$3 = this.moviesService
+            .getMovieSimilar(id)
+            .subscribe((movieSimilarData) => {
+                this.similarMovies = movieSimilarData;
+            });
+        this.subscriptions$.push(observable$3);
     }
 
     getMovieImages(id: string) {
-        this.moviesService.getMovieImages(id).subscribe((movieImagesData) => {
+        const observable$4 = this.moviesService.getMovieImages(id).subscribe((movieImagesData) => {
             this.movieImages = movieImagesData;
         });
+        this.subscriptions$.push(observable$4);
     }
 
     getMovieCredits(id: string) {
-        this.moviesService.getMovieCredits(id).subscribe((movieCreditsData) => {
-            this.movieCredits = movieCreditsData;
-        });
+        const observable$5 = this.moviesService
+            .getMovieCredits(id)
+            .subscribe((movieCreditsData) => {
+                this.movieCredits = movieCreditsData;
+            });
+        this.subscriptions$.push(observable$5);
+    }
+    ngOnDestroy() {
+        this.subscriptions$.forEach((suscription) => suscription.unsubscribe());
     }
 }
