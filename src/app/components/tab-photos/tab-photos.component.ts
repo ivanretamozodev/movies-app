@@ -1,3 +1,4 @@
+import { TvShowImages } from './../../models/tv';
 import { Component, Input, OnInit } from '@angular/core';
 import { MovieImages } from 'src/app/models/movie';
 import { IMAGES_SIZES } from 'src/app/constants/images-sizes';
@@ -8,6 +9,6 @@ import { IMAGES_SIZES } from 'src/app/constants/images-sizes';
     styleUrls: ['./tab-photos.component.scss']
 })
 export class TabPhotosComponent {
-    @Input() movieImages!: MovieImages;
+    @Input() movieImages!: MovieImages | TvShowImages;
     imagesSizes = IMAGES_SIZES;
 }

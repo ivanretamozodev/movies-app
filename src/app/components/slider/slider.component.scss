@@ -54,6 +54,7 @@
 
                 .info {
                     display: flex;
+                    align-items: center;
                     > span {
                         &:not(:last-child):after {
                             content: '|';

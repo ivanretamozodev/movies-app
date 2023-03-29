@@ -1,0 +1,19 @@
+@import '../../../styles/_colors.scss';
+:host ::ng-deep {
+    .p-tabview-nav {
+        justify-content: center;
+        li {
+            .p-tabview-nav-link {
+                background: $bgColor;
+            }
+
+            &.p-highlight .p-tabview-nav-link {
+                background: $bgColor;
+                border-bottom: 2px solid $primaryColor;
+            }
+        }
+    }
+    .p-tabview-title {
+        color: $primaryColor;
+    }
+}

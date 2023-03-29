@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Movie, MovieCredits, MovieDto, MovieImages, MovieVideoDto } from '../models/movie';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { TvDto } from '../models/tv';
 import { GenresDto } from '../models/genre';
 import { environment } from 'src/environments/environment';
 

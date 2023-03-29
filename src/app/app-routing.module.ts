@@ -1,3 +1,4 @@
+import { TvShowComponent } from './pages/tv-show/tv-show.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenresComponent } from './pages/genres/genres.component';
@@ -6,34 +7,38 @@ import { MovieComponent } from './pages/movie/movie.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'movies',
-    component: MoviesComponent
-  },
-  {
-    path: 'movies/genres/:genreId',
-    component: MoviesComponent
-  },
-  {
-    path: 'movie/:id',
-    component: MovieComponent
-  },
-  {
-    path: 'genres',
-    component: GenresComponent
-  },
-  {
-    path: '**',
-    redirectTo: ''
-  }
+    {
+        path: '',
+        component: HomeComponent
+    },
+    {
+        path: 'movies',
+        component: MoviesComponent
+    },
+    {
+        path: 'movies/genres/:genreId',
+        component: MoviesComponent
+    },
+    {
+        path: 'movie/:id',
+        component: MovieComponent
+    },
+    {
+        path: 'tv-show/:id',
+        component: TvShowComponent
+    },
+    {
+        path: 'genres',
+        component: GenresComponent
+    },
+    {
+        path: '**',
+        redirectTo: ''
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {}
