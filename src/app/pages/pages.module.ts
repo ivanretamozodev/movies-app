@@ -9,9 +9,10 @@ import { GenresComponent } from './genres/genres.component';
 import { ComponentsModule } from '../components/components.module';
 import { PrimengModule } from '../primeNG/primeng.module';
 import { TvShowComponent } from './tv-show/tv-show.component';
+import { TvShowsComponent } from './tv-shows/tv-shows.component';
 
 @NgModule({
-    declarations: [GenresComponent, HomeComponent, MovieComponent, MoviesComponent, TvShowComponent],
+    declarations: [GenresComponent, HomeComponent, MovieComponent, MoviesComponent, TvShowComponent, TvShowsComponent],
     imports: [RouterModule, ComponentsModule, PrimengModule],
     exports: [GenresComponent, HomeComponent, MovieComponent, MoviesComponent]
 })
