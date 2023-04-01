@@ -1,11 +1,4 @@
-import {
-    Tv,
-    TvDto,
-    TvShowCredits,
-    TvShowImages,
-    TvShowVideo,
-    TvShowVideoDto
-} from './../models/tv';
+import { Tv, TvDto, TvShowCredits, TvShowImages, TvShowVideoDto } from './../models/tv';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -16,11 +9,10 @@ import { of } from 'rxjs';
 })
 export class TvShowService {
     private readonly baseUrl: string = environment.baseUrl;
-    private readonly apiKey: string = environment.apiKey;
     constructor(private readonly http: HttpClient) {}
 
     getTvs(type: string = 'latest', count: number = 12) {
-        return this.http.get<TvDto>(`${this.baseUrl}/tv/${type}?api_key=${this.apiKey}`).pipe(
+        return this.http.get<TvDto>(`${this.baseUrl}/tv/${type}`).pipe(
             switchMap((res) => {
                 return of(res.results.slice(0, count));
             })
@@ -28,28 +20,31 @@ export class TvShowService {
     }
 
     getTvShow(id: string) {
-        return this.http.get<Tv>(`${this.baseUrl}/tv/${id}?api_key=${this.apiKey}`);
+        return this.http.get<Tv>(`${this.baseUrl}/tv/${id}`);
     }
 
     getTvShowVideos(id: string) {
-        return this.http
-            .get<TvShowVideoDto>(`${this.baseUrl}/tv/${id}/videos?api_key=${this.apiKey}`)
-            .pipe(
-                switchMap((res) => {
-                    return of(res.results);
-                })
-            );
-    }
-
-    getTvShowImages(id: string) {
-        return this.http.get<TvShowImages>(
-            `${this.baseUrl}/tv/${id}/images?api_key=${this.apiKey}`
+        return this.http.get<TvShowVideoDto>(`${this.baseUrl}/tv/${id}/videos`).pipe(
+            switchMap((res) => {
+                return of(res.results);
+            })
         );
     }
 
+    getTvShowImages(id: string) {
+        return this.http.get<TvShowImages>(`${this.baseUrl}/tv/${id}/images`);
+    }
+
     getTvShowCredits(id: string) {
-        return this.http.get<TvShowCredits>(
-            `${this.baseUrl}/tv/${id}/credits?api_key=${this.apiKey}`
+        return this.http.get<TvShowCredits>(`${this.baseUrl}/tv/${id}/credits`);
+    }
+
+    searchTvShows(page: number, search?: string) {
+        const url = search ? '/search/tv' : '/tv/top_rated';
+        return this.http.get<TvDto>(`${this.baseUrl}${url}?page=${page}&query=${search}`).pipe(
+            switchMap((res) => {
+                return of(res.results);
+            })
         );
     }
 }
