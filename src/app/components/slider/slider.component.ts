@@ -18,6 +18,8 @@ import { Movie } from '../../models/movie';
 export class SliderComponent implements OnInit {
     @Input() items: Movie[] | Tv[] = [];
     @Input() isBanner: boolean = false;
+    @Input() routerButton: string = '';
+    @Input() buttonText: string = '';
 
     currentSlideIndex: number = 0;
 

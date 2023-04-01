@@ -21,8 +21,12 @@
                         <span>{{ item.release_date | date : 'yyyy' }}</span>
                     </div>
                 </div>
-                <div class="desc mt-6">
-                    {{ item.overview }}
+                <div class="desc mt-3">{{ item.overview | slice : 0 : 150 }}...</div>
+                <div *ngIf="!isBanner" class="mt-3">
+                    <p-button
+                        [routerLink]="[routerButton, item.id]"
+                        [label]="buttonText"
+                    ></p-button>
                 </div>
             </div>
         </div>

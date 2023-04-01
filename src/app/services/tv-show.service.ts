@@ -1,3 +1,4 @@
+import { GenresDto } from './../models/genre';
 import { Tv, TvDto, TvShowCredits, TvShowImages, TvShowVideoDto } from './../models/tv';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -27,6 +28,13 @@ export class TvShowService {
         return this.http.get<TvShowVideoDto>(`${this.baseUrl}/tv/${id}/videos`).pipe(
             switchMap((res) => {
                 return of(res.results);
+            })
+        );
+    }
+    getTvShowGenres() {
+        return this.http.get<GenresDto>(`${this.baseUrl}/genre/tv/list`).pipe(
+            switchMap((res) => {
+                return of(res.genres);
             })
         );
     }
