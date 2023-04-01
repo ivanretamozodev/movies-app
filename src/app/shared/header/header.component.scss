@@ -14,7 +14,7 @@ header {
         &-logo {
             display: block;
             img {
-                width: 100px;
+                width: 150px;
             }
         }
 
@@ -26,6 +26,9 @@ header {
             li {
                 display: inline;
                 margin-right: 15px;
+                a {
+                    font-size: 1.2rem;
+                }
             }
         }
     }
