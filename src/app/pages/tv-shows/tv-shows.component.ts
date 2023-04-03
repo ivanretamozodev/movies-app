@@ -21,7 +21,11 @@ export class TvShowsComponent implements OnInit {
         this.tvShowService.searchTvShows(page, search).subscribe((show) => (this.tvShows = show));
     }
 
-    searchChanged() {}
+    searchChanged() {
+        if (this.searchValue.length > 4) {
+            this.getPagedTvShows(1, this.searchValue);
+        }
+    }
 
     paginate(event: any) {
         const pageNumber = event.page + 1;
